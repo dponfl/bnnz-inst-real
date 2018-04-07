@@ -1,55 +1,13 @@
 const TelegramBot = require('node-telegram-bot-api');
 const debug = require('./helpers');
-const TOKEN = '';
+const config = require('./config');
 
 const _ = require('lodash');
 
 console.log('Bot has been started ....');
 
-const clients = [
-  {
-    name: 'Dima',
-    chatId: '',
-    access: '',
-    rooms: [],
-  },
-  {
-    name: 'Me',
-    chatId: '',
-    access: '',
-    rooms: [],
-  },
-  {
-    name: 'Tanya',
-    chatId: '',
-    access: '',
-    rooms: [],
-  },
-];
 
-const rooms = [
-  {
-    roomName: 'Room01',
-  },
-];
-
-const access = [
-  {
-    accessName: 'platinum',
-  },
-  {
-    accessName: 'gold',
-  },
-  {
-    accessName: 'silver',
-  },
-  {
-    accessName: 'bronze',
-  },
-];
-
-
-const bot = new TelegramBot(TOKEN, {
+const bot = new TelegramBot(config.TOKEN, {
   polling: {
     interval: 300,
     autoStart: true,
@@ -59,7 +17,16 @@ const bot = new TelegramBot(TOKEN, {
   }
 });
 
+// _.each(config.clients, (elem) => {
+//   if (elem.name == 'User02') {
+//     bot.sendMessage(elem.chatId, 'First test message...');
+//   }
+// });
+
 bot.on('message', msg => {
+
+  console.log('Msg:');
+  console.dir(msg);
 
   const chatId = msg.chat.id;
 
@@ -99,3 +66,4 @@ bot.on('message', msg => {
   }
 
 });
+
