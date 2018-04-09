@@ -83,10 +83,24 @@ bot.on('message', msg => {
 
 });
 
+function _broadcastMessage(list, client, link) {
+
+  _.each(list, (el) => {
+    if (client.chatId != el.chatId) {
+      bot.sendMessage(el.chatId, 'Ваш друг '+ client.name
+        + ' выгрузил новое фото. Кликните, чтобы открыть этот пост >>> '
+        + link);
+    }
+  });
+
+} // _broadcastMessage
+
 function _sendMessage(id, link) {
 
   console.log('_sendMessage:');
-  console.dir(config);
+  // console.dir(config);
+
+  let clientsList = [];
 
   _.each(config.clients, (elem) => {
     if (elem.chatId == id) {
@@ -95,16 +109,16 @@ function _sendMessage(id, link) {
       switch (elem.access) {
         case 'platinum':
           console.log('platinum');
-          _.each(config.clients, (el) => {
-            if (elem.chatId != el.chatId) {
-              bot.sendMessage(el.chatId, 'Ваш друг '+ elem.name
-                + ' выгрузил новое фото. Кликните, чтобы открыть этот пост >>> '
-                + link);
-            }
-          });
+
+          clientsList = config.clients;
+
+          _broadcastMessage(clientsList, elem, link);
+
           break;
         case 'gold':
           console.log('gold');
+
+
           break;
         case 'silver':
           console.log('silver');
