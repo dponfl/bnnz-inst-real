@@ -116,7 +116,10 @@ function _sendMessage(id, link) {
 
           break;
         case 'gold':
-          console.log('gold');
+        case 'silver':
+        case 'bronze':
+
+          console.log('gold/silver/bronze');
 
           clientsList = _.filter(config.clients, (client) => {
             var found = false;
@@ -136,12 +139,12 @@ function _sendMessage(id, link) {
           _broadcastMessage(clientsList, elem, link);
 
           break;
-        case 'silver':
-          console.log('silver');
-          break;
-        case 'bronze':
-          console.log('bronze');
-          break;
+        // case 'silver':
+        //   console.log('silver');
+        //   break;
+        // case 'bronze':
+        //   console.log('bronze');
+        //   break;
         default:
           console.log('default');
       }
