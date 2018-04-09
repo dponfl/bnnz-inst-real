@@ -118,6 +118,22 @@ function _sendMessage(id, link) {
         case 'gold':
           console.log('gold');
 
+          clientsList = _.filter(config.clients, (client) => {
+            var found = false;
+            _.each(client.rooms, (r) => {
+                _.each(elem.rooms, (room) => {
+                  if (r == room) {
+                    found = true;
+                  }
+                });
+            });
+            return found;
+          });
+
+          console.log('clientsList:');
+          console.dir(clientsList);
+
+          _broadcastMessage(clientsList, elem, link);
 
           break;
         case 'silver':
